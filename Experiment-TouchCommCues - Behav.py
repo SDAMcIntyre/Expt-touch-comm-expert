@@ -15,11 +15,10 @@ exptInfo = {'01. Participant Code':'test',
             '07. Experimenter screen resolution':'1280,720',
             '08. Play audio cue for video sync':True,
             '09. Folder for saving data':'data'}
-exptInfo['10. Date and time']= data.getDateStr(format='%Y-%m-%d_%H-%M-%S') ##add the current time
 
-dlg = gui.DlgFromDict(exptInfo, title='Experiment details', fixed=['10. Date and time'])
+dlg = gui.DlgFromDict(exptInfo, title='Experiment details')
 if dlg.OK:
-    pass ## continue
+    exptInfo['10. Date and time']= data.getDateStr(format='%Y-%m-%d_%H-%M-%S') ##add the current time
 else:
     core.quit() ## the user hit cancel so exit
 
@@ -44,8 +43,8 @@ toucherScreenRes = [int(i) for i in exptInfo['07. Experimenter screen resolution
 
 items = ['attention','gratitude','love','sadness','happiness','calming']
 receiverItem = ['other'] + items
-receiverCueText = dict((line.strip().split('\t') for line in file('receiver-cues7.txt')))
-toucherCueText = dict((line.strip().split('\t') for line in file('toucher-cues.txt')))
+receiverCueText = dict((line.strip().split('\t') for line in open('receiver-cues.txt')))
+toucherCueText = dict((line.strip().split('\t') for line in open('toucher-cues.txt')))
 
 stimList = []
 for cue in items: stimList.append({'cue':cue})
@@ -63,7 +62,7 @@ if not os.path.exists(dataFolder):
 
 fileName = dataFolder + 'touch-comm-Behav_' + exptInfo['10. Date and time'] +'_P' + exptInfo['01. Participant Code']
 infoFile = open(fileName+'_info.csv', 'w') 
-for k,v in exptInfo.iteritems(): infoFile.write(k + ',' + str(v) + '\n')
+for k,v in exptInfo.items(): infoFile.write(k + ',' + str(v) + '\n')
 infoFile.close()
 dataFile = open(fileName+'_communication-data.csv', 'w')
 dataFile.write('trial,cued,response, other-text,correct\n')
@@ -190,7 +189,7 @@ receiverMessage = visual.TextStim(receiverWin,
 pygame.mixer.pre_init() 
 pygame.mixer.init()
 audioSync = pygame.mixer.Sound('./sounds/sync.wav')
-thisCue = pygame.mixer.Sound('./sounds/attention.wav')
+thisCue = pygame.mixer.Sound('./sounds/attention - short.wav')
 goStopCue = pygame.mixer.Sound('./sounds/go-stop.wav')
 # durations within the audio file:
 silentLead = 0.064

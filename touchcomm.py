@@ -144,13 +144,13 @@ if __name__ == "__main__":
         buttonText[n].autoDraw = False
     event.clearEvents()
     win.flip()
-    print rTime
+    print(rTime)
     if response == -2:
-        print 'aborted'
+        print('aborted')
     elif response == -1:
-        print 'timeout'
+        print('timeout')
     else:
-        print randomOptions[response]
+        print(randomOptions[response])
 
 def getTextResponse(win,mouse,submitButtonVisual,textVisual):
     alphanumLower = 'abcdefghijklmnopqrstuvwxyz1234567890'
@@ -250,7 +250,7 @@ if __name__ == "__main__":
         buttonText[n].autoDraw = False
     event.clearEvents()
     win.flip()
-    print options[clicked]
+    print(options[clicked])
 
     textBoxWidth = 1.5
     textBoxHeight = 0.4
@@ -306,4 +306,4 @@ if __name__ == "__main__":
     event.clearEvents()
     win.flip()
     response = getTextResponse(win,mouse,submitButton,textBoxResponse)
-    print response
+    print(response)
